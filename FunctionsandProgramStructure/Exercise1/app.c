@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 int mstrindex(char s[], char t[]);
 
 int main() {
