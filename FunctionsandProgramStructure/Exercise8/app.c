@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <string.h>
 
 void reverseStringRecursive(char* str, int start, int end) {
     if (start >= end) return;
