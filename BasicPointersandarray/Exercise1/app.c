@@ -57,7 +57,7 @@ int getint(int *pn)
   for (*pn = 0; isdigit(c) && c != EOF; c = getch())
 	*pn = 10 * (* pn) + (c - '0');
  
-  //(*pn) *= sign;
+  (*pn) *= sign;
  
   if (c != EOF)
 	ungetch(c);
