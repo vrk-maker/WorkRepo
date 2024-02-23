@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include <stdbool.h>
 void entervoterid();
 void validateVoterID(char *);
 void user_auth();
@@ -16,3 +16,8 @@ void voting_pannel();
 void update();
 void deleteserial();
 void display_file();
+void newdisplay_file();
+void newdeleteserial();
+void newupdate();
+void getarr();
+bool checkforold();

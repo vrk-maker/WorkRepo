@@ -2,20 +2,33 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <assert.h>
+// #include <assert.h>
 #include <ctype.h>
 #include "header.h"
-#define BUFFER_SIZE 100
-#define MAX_LINE_LENGTH 100
+#include <stdbool.h>
+// #define BUFFER_SIZE 100
+// #define MAX_LINE_LENGTH 100
 struct cname
 {
     char name[20];
     int no;
     int serial;
     int votes;
-} p[20];
+};
+struct cname *arr;
+// arr=(struct cname*) malloc(sizeof(struct cname)*4);
 
+int checkcand = 0;
+int alreadyentered = 0;
+int candlist;
+int i = 0;
 // user authentication
+void getarr()
+{
+    arr = (struct cname *)malloc(sizeof(struct cname) * candlist);
+    // return arr;
+}
+
 void user_auth()
 {
     char username[20];
@@ -55,9 +68,9 @@ void election_details()
     FILE *fp;
     static int flag = 0;
 
-    if(flag==1)
+    if (flag == 1)
     {
-        printf("Details already enterd\n"); //add
+        printf("Details already enterd\n"); // add
         return;
     }
 
@@ -71,9 +84,23 @@ void election_details()
 
     char ename[20];
     printf("Enter the number of votes: ");
-    scanf("%d", &x);
+    if (scanf("%d", &x) != 1)
+    {
+        printf("Invalid input. Please enter a number.\n");
+        while (getchar() != '\n')
+            ;
+        return;
+    }
     printf("Enter the name of the election: ");
     scanf("%s", ename);
+    for (int j = 0; ename[j] != '\0'; j++)
+    {
+        if (!isalpha(ename[j]))
+        {
+            printf("Invalid input. Candidate name must contain only alphabetic characters.\n");
+            return;
+        }
+    }
     time_t t;
     t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -86,10 +113,21 @@ void election_details()
 }
 
 // voter id verification
-char voter[20][11];
+
 int numVoters = 0;
 void validateVoterID(char *voterID)
 {
+    char voter[x][11]; // rows->maximum voter id =0 to x-1 and columns->length of voterid=0 to 10
+    if (i == 0)
+    {
+        printf("\nNo candidate at current moment\n");
+        return;
+    }
+    // if (i != candlist)
+    // {
+    //     printf("\nCandidate list not out yet\n");
+    //     return;
+    // }
     if (numVoters >= x)
     {
         printf("Maximum number of voters already reached. Voting is closed.\n");
@@ -102,6 +140,7 @@ void validateVoterID(char *voterID)
         if (strcmp(voterID, voter[i]) == 0)
         {
             printf("You have already voted!!!\n");
+            // printf("%2[A-Z]%6[0-9]%2[A-Z]\n");
             system("sleep 3");
             return;
         }
@@ -110,8 +149,9 @@ void validateVoterID(char *voterID)
     if (strlen(voterID) != 10)
     {
         printf("Invalid voter ID. Please check the format.\n");
+        printf("%2[A-Z]%6[0-9]%2[A-Z]\n");
         system("sleep 3");
-        return; 
+        return;
     }
 
     for (int i = 0; i < 2; i++)
@@ -119,8 +159,9 @@ void validateVoterID(char *voterID)
         if (!isalpha(voterID[i]) || !isupper(voterID[i]))
         {
             printf("Invalid voter ID. Please check the format.\n");
+            printf("%2[A-Z]%6[0-9]%2[A-Z]\n");
             system("sleep 3");
-            return; 
+            return;
         }
     }
 
@@ -129,6 +170,7 @@ void validateVoterID(char *voterID)
         if (!isdigit(voterID[i]))
         {
             printf("Invalid voter ID. Please check the format.\n");
+            printf("%2[A-Z]%6[0-9]%2[A-Z]\n");
             system("sleep 3");
             return;
         }
@@ -139,6 +181,7 @@ void validateVoterID(char *voterID)
         if (!isalpha(voterID[i]) || !isupper(voterID[i]))
         {
             printf("Invalid voter ID. Please check the format.\n");
+            printf("%2[A-Z]%6[0-9]%2[A-Z]\n");
             system("sleep 3");
             return;
         }
@@ -152,20 +195,34 @@ void validateVoterID(char *voterID)
 }
 
 // add candidate
-int i = 0;
+
 void add_cand()
 {
-
+    // struct cname *arr=getarr();
+    if (i == candlist)
+    {
+        printf("Maximum number of candidates already reached\n");
+        return;
+    }
     int j;
     int candidateExists = 0; // Flag to check if candidate already exists
 
     printf("Enter candidate name: ");
-    scanf("%s", p[i].name);
+    scanf("%s", (arr + i)->name);
+
+    for (j = 0; (arr + i)->name[j] != '\0'; j++)
+    {
+        if (!isalpha((arr + i)->name[j]))
+        {
+            printf("Invalid input. Candidate name must contain only alphabetic characters.\n");
+            return;
+        }
+    }
 
     // Check if candidate name already exists
     for (j = 0; j < i; j++)
     {
-        if (strcmp(p[i].name, p[j].name) == 0)
+        if (strcmp((arr + i)->name, (arr + j)->name) == 0)
         {
             printf("Candidate name already exists!\n");
             system("sleep 3");
@@ -177,44 +234,98 @@ void add_cand()
     if (!candidateExists)
     {
         printf("Enter candidate number: ");
-        scanf("%d", &p[i].no);
-        i++;
+        // scanf("%d", &p[i].no);
+        if (scanf("%d", &(arr + i)->no) != 1)
+        {
+            // printf("Invalid input. Candidate number must contain only digits.\n");
+            // return;
+            printf("Invalid input. Please enter a number.\n");
+            while (getchar() != '\n')
+                ;
+            return;
+        }
+        else
+        {
+            printf("Candidate Name:%s\tCandidate Number:%d\tSuccessfully added\n", (arr + i)->name, (arr + i)->no);
+            i++;
+            checkcand++;
+        }
     }
 }
 
 // delete candidate
 void delete_cand()
 {
-    int roll;
-    printf("enter number:");
-    scanf("%d", &roll);
+    // struct cname *arr=getarr();
+    if (i == 0)
+    {
+        printf("\nNo candidate at current moment\n");
+        return;
+    }
+
+    int roll, flag = 0;
+    printf("Enter candidate number to be deletd: ");
+    if (scanf("%d", &roll) != 1)
+    {
+        printf("Invalid input. Please enter a number.\n");
+        while (getchar() != '\n')
+            ;
+        return;
+    }
+
     for (int j = 0; j < i; j++)
     {
-        if (roll == p[j].no)
+        if (roll == (arr + j)->no)
         {
-            printf("The candidate named %s whose number is %d is deleted", p[j].name, p[j].no);
+            flag = 1;
+            printf("The candidate named %s whose number is %d is deleted\n", (arr + j)->name, (arr + j)->no);
             for (int k = j; k < i - 1; k++)
             {
-                p[k] = p[k + 1];
+                *(arr + k) = *(arr + k + 1);
             }
-            p[i - 1].no = 0;
-            strcpy(p[i - 1].name, "");
+            // Clear the last element
+            arr[i - 1].no = 0;
+            strcpy(arr[i - 1].name, "");
+            // Decrease the count of candidates
+            i--;
+            // checkcand--;
             break;
         }
     }
-    i--;
+
+    if (flag == 0)
+    {
+        printf("No candidate with that number\n");
+        return;
+    }
 }
 
 // edit details
 void edit_cand()
 {
-    int roll;
-    printf("enter number that you want to update:");
-    scanf("%d", &roll);
+    // struct cname *arr=getarr();
+    if (i == 0)
+    {
+        printf("\nNo candidate at current moment\n");
+        return;
+    }
+    int roll, flag = 0;
+    printf("enter the candidate number that you want to update:");
+    // scanf("%d", &roll);
+    if (scanf("%d", &roll) != 1)
+    {
+        printf("Invalid input. Please enter a number.\n");
+        while (getchar() != '\n')
+            ;
+        return;
+    }
+    int check1, check2;
     for (int j = 0; j < i; j++)
     {
-        if (p[j].no == roll)
+        if ((arr + j)->no == roll)
         {
+            flag = 1;
+            printf("Updating for roll=%d\tname=%s\n", (arr + j)->no, (arr + j)->name);
             int choice;
             while (choice != 3)
             {
@@ -223,19 +334,52 @@ void edit_cand()
                 printf("2.Candidate number\n");
                 printf("3.Exit\n");
                 printf("Enter your choice of updation:");
-                scanf("%d", &choice);
+                if (scanf("%d", &choice) != 1)
+                {
+                    printf("Invalid input. Please enter a number.\n");
+                    while (getchar() != '\n')
+                        ;
+                    break;
+                }
+                // printf("\n");
                 switch (choice)
                 {
                 case 1:
+                    check1 = 0;
                     printf("Enter candidate Name:");
-                    scanf("%s", p[j].name);
+                    scanf("%s", (arr + j)->name);
+                    for (int x = 0; (arr + j)->name[x] != '\0'; x++)
+                    {
+                        if (!isalpha((arr + j)->name[x]))
+                        {
+                            check1 = 1;
+                            printf("Invalid input. Candidate name must contain only alphabetic characters.\n");
+                            break;
+                        }
+                    }
+                    if (check1 == 0)
+                    {
+                        printf("\nName updation success\n");
+                    }
                     break;
                 case 2:
-                    printf("Enter candidate Number");
-                    scanf("%d", &p[j].no);
+                    check2 = 0;
+                    printf("Enter candidate Number:");
+                    if (scanf("%d", &(arr + j)->no) != 1)
+                    {
+                        check2 = 1;
+                        printf("Invalid input. Please enter a number.\n");
+                        while (getchar() != '\n')
+                            ;
+                        break;
+                    }
+                    if (check2 == 0)
+                    {
+                        printf("\nNumber updation success\n");
+                    }
                     break;
                 case 3:
-                    printf("records updated successfully!!");
+                    printf("Exiting edit option!\n");
                     break;
                 default:
                     printf("Invalid choice! Please enter a number between 1 and 3.\n");
@@ -244,99 +388,166 @@ void edit_cand()
             }
         }
     }
+    if (flag == 0)
+    {
+        printf("No candidate with that number\n");
+        return;
+    }
 }
 
 // vote count
 void vote_cand()
 {
-    int no;
-    static int count = 0;
-
-    if (count == x)
+    if (i == 0)
     {
-        printf("\nMaximum vote limit reached!\n");
-        // system("sleep 3");
+        printf("\nNo candidate at current moment\n");
         return;
     }
-
-    printf("\nEnter the candidate number you want to vote for:");
-    scanf("%d", &no);
-
-    for (int j = 0; j < i; j++)
+    else
     {
-        if (p[j].no == no)
+        int flag = 0;
+        if (checkcand == 0)
         {
-            printf("\nYou have voted for: %s\n", p[j].name);
-            p[j].votes++;
-            count++;
-            system("sleep 3");
+            printf("\nNo candidate at current moment\n");
+            return;
+        }
+        int no;
+        static int count = 0;
+
+        if (count == x)
+        {
+            printf("\nMaximum vote limit reached!\n");
+            // system("sleep 3");
+            return;
+        }
+
+        while (1)
+        {
+            printf("\nEnter the candidate number you want to vote for:");
+            if (scanf("%d", &no) != 1)
+            {
+                printf("Invalid input. Please enter a number.\n");
+                while (getchar() != '\n')
+                    ;
+                continue; // Ask for input again
+            }
+
+            for (int j = 0; j < i; j++)
+            {
+                if ((arr + j)->no == no)
+                {
+                    flag = 1;
+                    printf("\nYou have voted for: %s\n", (arr + j)->name);
+                    (arr + j)->votes = (arr + j)->votes + 1;
+                    count++;
+                    system("sleep 3");
+                    break; // Exit the loop if candidate found
+                }
+            }
+
+            if (flag == 0)
+            {
+                printf("\nNumber not found\n");
+                continue; // Ask for input again
+            }
+
+            break; // Exit the loop if candidate found or maximum vote limit reached
         }
     }
+    // struct cname *arr=getarr();
 }
 
 // Voting results
 void result_cand()
 {
-    int max_votes = 0;
-    int winner_count = 0;
-    int winner_indices[3];
-
-    for (int x = 0; x < i; x++)
+    // struct cname *arr=getarr();
+    if (i == 0)
     {
-        if (p[x].votes > max_votes)
-        {
-            max_votes = p[x].votes;
-        }
-    }
-    for (int x = 0; x < i; x++)
-    {
-        if (p[x].votes == max_votes)
-        {
-            winner_indices[winner_count++] = x;
-        }
-    }
-    if (winner_count > 0)
-    {
-        printf("\nElection Winners:\n");
-        for (int j = 0; j < winner_count; j++)
-        {
-            printf("%s\n", p[winner_indices[j]].name);
-        }
+        printf("\nNo candidate at current moment\n");
+        return;
     }
     else
     {
-        printf("\nNo votes have been cast yet.\n");
+        int max_votes = 0;
+        int winner_count = 0;
+        int winner_indices[candlist];
+
+        // Find the maximum number of votes
+        for (int x = 0; x < i; x++)
+        {
+            if ((arr + x)->votes > max_votes)
+            {
+                max_votes = (arr + x)->votes;
+            }
+        }
+
+        // Find the indices of candidates with the maximum number of votes
+        for (int x = 0; x < i; x++)
+        {
+            if ((arr + x)->votes == max_votes)
+            {
+                winner_indices[winner_count++] = x;
+            }
+        }
+
+        if (winner_count > 0)
+        {
+            printf("\nElection Winners:\n");
+            printf("Candidate Name\t\tVotesCount\n");
+            for (int j = 0; j < winner_count; j++)
+            {
+                printf("%s\t\t\t%d\n", (arr + winner_indices[j])->name, (arr + winner_indices[j])->votes);
+            }
+        }
+        else
+        {
+            printf("\nNo votes have been cast yet.\n");
+        }
+        system("sleep 3");
     }
-    system("sleep 3");
 }
 
-//show cand
+// show cand
 void show_cand()
 {
+
     int sno = 1;
     printf("SrNo.\tName\t\t\tNumber\n");
     for (int x = 0; x < i; x++)
     {
-        printf("%d\t%s\t\t\t%d\n", sno, p[x].name, p[x].no);
+        printf("%d\t%s\t\t\t%d\n", sno, (arr + x)->name, (arr + x)->no);
         ++sno;
     }
+    // struct cname *arr=getarr();
 }
 
 // Display candidate
 void display_cand()
 {
+    // struct cname *arr=getarr();
+    if (i == 0)
+    {
+        printf("\nNo candidate at current moment\n");
+        return;
+    }
     int sno = 1;
     printf("SrNo.\tName\t\t\tNumber\t\tVotesCount\n");
     for (int x = 0; x < i; x++)
     {
-        printf("%d\t%s\t\t\t%d\t\t%d\n", sno, p[x].name, p[x].no, p[x].votes);
+        printf("%d\t%s\t\t\t%d\t\t%d\n", sno, (arr + x)->name, (arr + x)->no, (arr + x)->votes);
         ++sno;
     }
-    system("sleep 2");
-    system("clear");
 }
 void store_file()
 {
+    // struct cname *arr=getarr();
+    if (i == 0)
+    {
+        printf("\nNo candidate at current moment\n");
+        remove("candidate.csv");
+        return;
+    }
+
     int sno = 1;
     FILE *fp;
     fp = fopen("candidate.csv", "w");
@@ -345,18 +556,49 @@ void store_file()
 
     for (int j = 0; j < i; j++)
     {
-        fprintf(fp, "%d,%s,%d,%d\n", sno, p[j].name, p[j].no, p[j].votes);
+        fprintf(fp, "%d,%s,%d,%d\n", sno, (arr + j)->name, (arr + j)->no, (arr + j)->votes);
         ++sno;
     }
 
     printf("Data stored in the file.....\n");
     fclose(fp);
-    system("sleep 2");
-    system("clear");
+    // system("sleep 2");
+    // system("clear");
 }
 
-
 // UPDATE OLD ELECTION----------------------------------------------------------------
+
+bool checkforold()
+{
+    FILE *fp;
+    bool exist = false;
+    fp = fopen("candidate.csv", "r");
+    if (fp != NULL)
+    {
+        exist = true;
+        fclose(fp);
+        // update();
+    }
+    return exist;
+}
+
+// bool checkelection()
+// {
+//     int sum = 0;
+//     for (int y = 0; y < candlist; y++)
+//     {
+//         sum = sum + (arr + y)->votes;
+//     }
+//     if (sum == x)
+//     {
+//         return true;
+//     }
+//     else
+//     {
+//         return false;
+//     }
+// }
+
 void display_file()
 {
     FILE *fp;
@@ -368,35 +610,79 @@ void display_file()
         printf("Error opening file!\n");
         return;
     }
-    //printf("SrNo.,Name,Number,VotesCount\n");
-    //fgets(line, sizeof(line), fp);
+    // printf("SrNo.,Name,Number,VotesCount\n");
+    // fgets(line, sizeof(line), fp);
     while ((fgets(line, sizeof(line), fp)) != NULL)
     {
         printf("%s\n", line);
     }
 
     fclose(fp);
-    system("sleep 7");
-    //system("clear");
+    // system("sleep 7");
+    // system("clear");
+}
+
+void newdisplay_file()
+{
+    FILE *fp;
+    bool exist = false;
+    fp = fopen("candidate.csv", "r");
+    if (fp != NULL)
+    {
+        exist = true;
+        fclose(fp);
+        display_file();
+    }
+    if (!exist)
+    {
+        printf("\nfile candidate.csv not found\n");
+        return;
+    }
 }
 
 void deleteserial()
 {
     FILE *fp, *tmp;
     fp = fopen("candidate.csv", "r");
-    tmp = fopen("temp.csv", "w");
+    // tmp = fopen("temp.csv", "w");
 
     char line[200];
-    int srno, curno, num, vote;
+    int srno, curno, num, vote, flag = 0;
     char name[200];
 
     printf("enter serial number:");
-    scanf("%d", &srno);
+    // scanf("%d", &srno);
+    if (scanf("%d", &srno) != 1)
+    {
+        printf("Invalid input. Please enter a number.\n");
+        while (getchar() != '\n')
+            ;
+        return;
+    }
     printf("\n");
 
+    while (fgets(line, sizeof(line), fp) != NULL)
+    {
+        sscanf(line, "%d", &curno);
+        if (curno == srno)
+        {
+            flag = 1;
+            printf("Serial number is valid.\n");
+            break;
+        }
+    }
+    if (flag == 0)
+    {
+        printf("Serial number is invalid.\n");
+        return;
+    }
+    fclose(fp);
+
+    fp = fopen("candidate.csv", "r");
+    tmp = fopen("temp.csv", "w");
     fgets(line, sizeof(line), fp);
     fprintf(tmp, "%s", line);
-    //printf("\nDoint the file transfer\n");
+    // printf("\nDoint the file transfer\n");
     while (fgets(line, sizeof(line), fp))
     {
         sscanf(line, "%d,%[^,],%d,%d", &curno, name, &num, &vote);
@@ -405,71 +691,123 @@ void deleteserial()
             fprintf(tmp, "%d,%s,%d,%d\n", curno, name, num, vote);
         }
     }
-    //printf("\nFile completed\n");
+    // printf("\nFile completed\n");
 
     fclose(fp);
     fclose(tmp);
     remove("candidate.csv");
     rename("temp.csv", "candidate.csv");
     printf("\nSerial number: %d is deleted\n", srno);
-    system("sleep 7");
-    system("clear");
+    // system("sleep 7");
+    // system("clear");
 }
 
+void newdeleteserial()
+{
+    FILE *fp;
+    bool exist = false;
+    fp = fopen("candidate.csv", "r");
+    if (fp != NULL)
+    {
+        exist = true;
+        fclose(fp);
+        deleteserial();
+    }
+    if (!exist)
+    {
+        printf("\nfile candidate.csv not found\n");
+        return;
+    }
+}
 
+// int checkoldelection = 0;
 void admin_pannel()
 {
     user_auth();
+    if (alreadyentered == 0)
+    {
+        printf("\nEnter the number of candidates:");
+        // scanf("%d", &candlist);
+        if (scanf("%d", &candlist) != 1)
+        {
+            printf("Invalid input. Please enter a number.\n");
+            while (getchar() != '\n')
+                ;
+            return;
+        }
+        getarr();
+        alreadyentered = 1;
+    }
+    printf("\n");
+    // struct cname *arr;
+    // arr=(struct cname*) malloc(sizeof(struct cname)*4);
     int choice;
 
     do
     {
-        system("clear");
-        printf("1.Start New election\n");
+        // system("clear");
+        printf("\n1.Start New election\n");
         printf("2.Update old election\n");
-        printf("3. Exit\n");
+        printf("3.Exit\n");
         printf("enter your choice:");
-        scanf("%d", &choice); // Read the choice after displaying the menu
+        // scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1)
+        {
+            printf("Invalid input. Please enter a number.\n");
+            while (getchar() != '\n')
+                ;
+            // system("sleep 2");
+            continue;
+        } // Read the choice after displaying the menu
         printf("\n");
         switch (choice)
         {
         case 1:
         {
+            // checkoldelection=1;
             int inner_choice;
             do
             {
-                system("clear");
+                // system("clear");
                 printf("\n---------Main Menu for new election----------\n");
-                printf("1. Election Details\n");
-                printf("2. Add Candidate\n");
-                printf("3. Delete Candidate\n");
-                printf("4. Display Candidates\n");
-                printf("5. Edit details\n");
-                printf("6. Store data in the file\n");
-                printf("7. Exit\n");
+                printf("1.Election Details\n");
+                printf("2.Add Candidate\n");
+                printf("3.Delete Candidate\n");
+                printf("4.Display Candidates\n");
+                printf("5.Edit details\n");
+                printf("6.Store data in the file\n");
+                printf("7.Exit\n");
+                // printf("8. Exit\n");
                 printf("Enter your choice: ");
-                scanf("%d", &inner_choice);
+                if (scanf("%d", &inner_choice) != 1)
+                {
+                    printf("Invalid input. Please enter a number.\n");
+                    while (getchar() != '\n')
+                        ;
+                    // system("sleep 2");
+                    continue;
+                }
 
                 switch (inner_choice)
                 {
                 case 1:
-                    system("clear");
+                    // system("clear");
                     election_details();
                     break;
                 case 2:
-                    system("clear");
+                    // system("clear");
                     add_cand();
                     break;
                 case 3:
-                    system("clear");
+                    // system("clear");
                     delete_cand();
-                    system("clear");
+                    // system("clear");
                     break;
                 case 4:
                     display_cand();
                     break;
                 case 5:
-                    system("clear");
+                    // system("clear");
                     edit_cand();
                     break;
                 case 6:
@@ -477,13 +815,11 @@ void admin_pannel()
                     break;
                 case 7:
                     printf("Exiting the start the new election\n");
-                    system("sleep 2");
-                    system("clear");
                     break;
                 default:
                     printf("Invalid choice! Please enter a number between 1 and 7.\n");
-                    system("sleep 2");
-                    system("clear");
+                    // system("sleep 2");
+                    // system("clear");
                     break;
                 }
             } while (inner_choice != 7);
@@ -491,57 +827,83 @@ void admin_pannel()
         }
         case 2:
         {
-            int inner_choice;
-            do
+            // if (checkoldelection == 0)
+            // {
+            //     printf("No election is present at the moment.\n");
+            //     // system("sleep 5");
+            //     break;
+            // }
+            // bool fine = checkforold();
+            bool ok = checkforold();
+            if (ok == true)
             {
-                system("clear");
-                printf("\n---------Main Menu for old election----------\n");
-                printf("1. Delete Candidate\n");
-                printf("2. Display Candidates\n");
-                printf("3. Edit details\n");
-                printf("4. Exit\n");
-                printf("Enter your choice: ");
-                scanf("%d", &inner_choice);
-
-                switch (inner_choice)
+                int inner_choice;
+                do
                 {
-                case 1:
-                    //system("clear");
-                    deleteserial();
-                    break;
-                case 2:
                     // system("clear");
-                    display_file();
-                    //system("sleep 3");
-                    break;
-                case 3:
-                    update();
-                    break;
-                case 4:
-                    system("clear");
-                    printf("Exiting the update old election section\n"); // Fixed the message
-                    system("sleep 2");
-                    break;
-                default:
-                    printf("Invalid choice! Please enter a number between 1 and 4.\n");
-                    system("sleep 2");
-                    system("clear");
-                    break;
-                }
-            } while (inner_choice != 4);
-            break; // Exiting the inner do-while loop
+                    printf("\n---------Main Menu for old election----------\n");
+                    printf("1. Delete Candidate\n");
+                    printf("2. Display Candidates\n");
+                    printf("3. Edit details\n");
+                    printf("4. Exit\n");
+                    printf("Enter your choice: ");
+                    // scanf("%d", &inner_choice);
+                    if (scanf("%d", &inner_choice) != 1)
+                    {
+                        printf("Invalid input. Please enter a number.\n");
+                        while (getchar() != '\n')
+                            ;
+                        // system("sleep 2");
+                        continue;
+                    }
+
+                    switch (inner_choice)
+                    {
+                    case 1:
+                        // system("clear");
+                        newdeleteserial();
+                        break;
+                    case 2:
+                        // system("clear");
+                        newdisplay_file();
+                        // system("sleep 3");
+                        break;
+                    case 3:
+                        newupdate();
+                        break;
+                    case 4:
+                        // system("clear");
+                        printf("Exiting the update old election section\n"); // Fixed the message
+                        // system("sleep 2");
+                        break;
+                    default:
+                        printf("Invalid choice! Please enter a number between 1 and 4.\n");
+                        // system("sleep 2");
+                        // system("clear");
+                        break;
+                    }
+                } while (inner_choice != 4);
+                break;
+            }
+            else
+            {
+                printf("No election is present at the moment.\n");
+                // system("sleep 5");
+                break;
+            }
+            // Exiting the inner do-while loop
         }
 
         case 3:
             printf("Exiting the admin panel\n");
-            system("sleep 2");
-            system("clear");
+            // system("sleep 2");
+            // system("clear");
             break;
 
         default:
-            printf("Invalid choice! Please enter either 1 or 3.\n");
-            system("sleep 2");
-            system("clear");
+            printf("Invalid choice! Please enter between 1 and 3.\n");
+            // system("sleep 2");
+            // system("clear");
             break;
         }
     } while (choice != 3);
