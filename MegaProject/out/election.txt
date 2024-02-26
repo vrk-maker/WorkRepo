@@ -1,0 +1,3 @@
+Election name: loksabha
+Date of the election: 26-2-2024
+Maximum votes: 4

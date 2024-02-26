@@ -115,9 +115,10 @@ void election_details()
 // voter id verification
 
 int numVoters = 0;
+char voter[10][11];
 void validateVoterID(char *voterID)
 {
-    char voter[x][11]; // rows->maximum voter id =0 to x-1 and columns->length of voterid=0 to 10
+     // rows->maximum voter id =0 to x-1 and columns->length of voterid=0 to 10
     if (i == 0)
     {
         printf("\nNo candidate at current moment\n");
