@@ -4,12 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXLINE 100
-#define NUMBER '0'
-
-#define BUFSIZE 100
-
-#define MAXVAL 100
+#define MAXLINE 100 /**< Maximum length of line */
+#define NUMBER 0    /**< Signal that a number was found */
+#define BUFSIZE 100 /**< The size of the input buffer */
+#define MAXVAL 100  /**< Maximum depth of val stack */
 
 int sp = 0;
 int bufp = 0;
@@ -117,6 +115,10 @@ int main(void)
     return 0;
 }
 
+/**
+ * @brief Pushes a double value onto the stack.
+ * @param[in] f The double value to be pushed onto the stack.
+ */
 void push(double f)
 {
     if (sp < MAXVAL)
@@ -125,6 +127,11 @@ void push(double f)
         printf("error: stack full, can't push %g\n", f);
 }
 
+
+/**
+ * @brief Pops a double value from the stack.
+ * @return The popped double value.
+ */
 double pop(void)
 {
     if (sp > 0)
@@ -136,6 +143,13 @@ double pop(void)
     }
 }
 
+
+/**
+ * @brief Reads a line of input from standard input.
+ * @param[out] s The character array where the input line will be stored.
+ * @param[in] lim The maximum number of characters to read, including the null terminator.
+ * @return The length of string.
+ */
 int mgetLine(char s[], int lim)
 {
     int c, i;
@@ -158,6 +172,12 @@ int mgetLine(char s[], int lim)
 
 char line[MAXLINE];
 int li=0;
+
+/**
+ * @brief Gets the next operator or operand from input.
+ * @param[in] s a character array where the operator or operand will be stored.
+ * @return `NUMBER` if the input represents a number, or the character itself if it's an operator.
+ */
 int getop(char s[])
 {
     int i, c;

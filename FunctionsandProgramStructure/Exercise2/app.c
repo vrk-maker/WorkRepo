@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -6,7 +7,7 @@
 #define MAXLINE 100
 
 /* Function prototypes */
-double atof(char s[]);
+double custom_atof(char s[]);
 
 /* Main function */
 int main() {
@@ -15,8 +16,8 @@ int main() {
 
     printf("Enter string: ");
     printf("\n");
-    
-    gets(line);
+
+    fgets(line, MAXLINE, stdin);
 
     int len = strlen(line);
     printf("Length = %d", len);
@@ -24,15 +25,20 @@ int main() {
 
     sum = 0; // Initialize sum to zero
 
-    sum += atof(line);
+    sum += custom_atof(line);
     printf("Floating-point value = %lf", sum);
 
     return 0;
 }
 
-/* atof: convert string s to double */
-double atof(char s[]) {
-    double val, power,res;
+/* custom_atof: convert string s to double */
+/**
+ * @brief Converts a string to a double value.
+ * @param[in] s The character array to be converted to a double.
+ * @return The double value represented by the input string.
+ */
+double custom_atof(char s[]) {
+    double val, power, res;
     int i, sign;
 
     // Skip leading white spaces
@@ -70,10 +76,9 @@ double atof(char s[]) {
             i++;
         }
 
-        res= pow(10, expSign * exponent);
+        res = pow(10, expSign * exponent);
     }
 
     // Calculate the final floating-point value
-    return (val/power)*res;
+    return (val / power) * res;
 }
-

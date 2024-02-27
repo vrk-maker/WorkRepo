@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include"head.h"
 
-#define MAXLEN 100
+#define MAXLEN 100 /**< Maximum length of string */
 
 void itoa(int n, char s[]);
 

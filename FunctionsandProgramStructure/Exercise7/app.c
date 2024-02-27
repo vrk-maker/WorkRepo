@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include<stdio.h>
 
-#define MAXLEN 100
+#define MAXLEN 100 /**< Maximum length of string */
 
 void itoa(int n, char s[]);
 
@@ -19,6 +19,11 @@ int main(void) {
     return 0;
 }
 
+/**
+ * @brief Converts an integer to a string representation.
+ * @param[in] n The integer to be converted to a string.
+ * @param[out] s The character array where the resulting string will be stored.
+ */
 void itoa(int n, char s[]) {
     static int i;
 

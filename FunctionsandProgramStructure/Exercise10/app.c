@@ -1,9 +1,13 @@
 #include <stdio.h>
 
-#define BUF_SIZE 5
+#define BUF_SIZE 5 /**< The size of the input buffer */
 char buf[BUF_SIZE];
 int bufp = 0;
 
+/**
+ * @brief Adds a character to the input buffer.
+ * @param[in] c The character to be added to the buffer.
+ */
 void ungetch(char c) {
     if (c == '\0') {
         printf("EOF added\n");

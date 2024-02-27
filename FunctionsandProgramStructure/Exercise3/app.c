@@ -4,12 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXOP 100
-#define NUMBER '0'
-
-#define BUFSIZE 100
-
-#define MAXVAL 100
+#define MAXOP 100   /**< Maximum size of operand or operator */
+#define NUMBER 0    /**< Signal that a number was found */
+#define BUFSIZE 100 /**< The size of the input buffer */
+#define MAXVAL 100  /**< Maximum depth of val stack */
 
 int sp = 0;
 int bufp = 0;
@@ -74,6 +72,10 @@ int main(void) {
     return 0;
 }
 
+/**
+ * @brief Pushes a double value onto the stack.
+ * @param[in] f The double value to be pushed onto the stack.
+ */
 void push(double f) {
     if (sp < MAXVAL)
         val[sp++] = f;
@@ -81,6 +83,10 @@ void push(double f) {
         printf("error:stack full, cant push %g\n", f);
 }
 
+/**
+ * @brief Pops a double value from the stack.
+ * @return The double value popped from the stack.
+ */
 double pop(void) {
     if (sp > 0)
         return val[--sp];
@@ -90,6 +96,11 @@ double pop(void) {
     }
 }
 
+/**
+ * @brief Gets the next operator or operand from input.
+ * @param[in] s a character array where the operator or operand will be stored.
+ * @return `NUMBER` if the input represents a number, or the character itself if it's an operator.
+ */
 int getop(char s[]) {
     int i, c;
     while ((s[0] = c = getch()) == ' ' || c == '\t');
@@ -109,12 +120,21 @@ int getop(char s[]) {
     return NUMBER;
 }
 
+/**
+ * @brief Pushes a character back into the buffer.
+ * @param[in] c is the character to be pushed back.
+ */
 void ungetch(int c) {
     if (bufp >= BUFSIZE)
         printf("ungetch: too many characters\n");
     else
         buf[bufp++] = c;
 }
+
+/**
+ * @brief Retrieves a character from input or the buffer.
+ * @return The character retrieved.
+ */
 int getch(void) /* get a (possibly pushed-back) character */
 {
     return (bufp > 0) ? buf[--bufp] : getchar();

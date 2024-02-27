@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#define PI 3.14159265
+#define PI 3.14159265 /**< Value of pi */
 int main()
 {
     double x=12.0,result,y=60.0,ans,val;
