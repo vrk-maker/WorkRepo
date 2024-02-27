@@ -25,6 +25,11 @@ int main()
   return 0;
 }
 
+/**
+ * @brief version of scanf analogous to minprintf
+ * @param[in] fmt A format string.
+ * @param[in] ... Variable number of arguments to store the input values.
+ */
 void minscanf(char *fmt, ...)
 {
   va_list ap; /* points to each unnamed arg in turn */

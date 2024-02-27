@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * @brief Searches for a pattern in a file and prints the lines where the pattern is found.
+ * @param[in] fp Pointer to the file to be searched.
+ */
 void mstrindex(FILE *fp)
 {
     char pattern[] = "ould";
@@ -21,6 +25,12 @@ void mstrindex(FILE *fp)
     }
 }
 
+/**
+ * @brief Main function.
+ * @param[in] argc Number of command-line arguments.
+ * @param[in] argv Array of command-line arguments.
+ * @return 0 on success.
+ */
 int main(int argc, char *argv[]) 
 {
     FILE *fp = fopen(argv[1], "r");

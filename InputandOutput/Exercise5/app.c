@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+/**
+ * @brief Printing the data inside the file.
+ * @param[in] file Pointer to the file.
+ */
 void printFile(FILE *file) 
 {
     char ch;

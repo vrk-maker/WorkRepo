@@ -1,5 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+
+/**
+ * @brief Compares the content of two text files line by line.
+ * @param[in] fp Pointer to the first file to be compared.
+ * @param[in] ft Pointer to the second file to be compared.
+ */
 void compareFiles(FILE *fp,FILE *ft)
 {
     char line1[1000], line2[1000];

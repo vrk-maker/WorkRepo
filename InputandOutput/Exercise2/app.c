@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define MAX_LINE_LENGTH 20
+#define MAX_LINE_LENGTH 20 /**< Maximum line length for text formatting */
 
 int main() {
     char text[] = "This is a longer string with more \t than 20 characters.\n";

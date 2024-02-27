@@ -1,6 +1,12 @@
 #include <ctype.h>
 #include <stdio.h>
 
+/**
+ * @brief Counts the number of uppercase letters in a given string.
+ * @param[in] i The index to traverse the string.
+ * @param[in] counter The current count of uppercase letters.
+ * @return The total count of uppercase letters in the string.
+ */
 int test_upper(int i, int counter)
 {
     char ch;

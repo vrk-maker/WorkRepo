@@ -26,6 +26,11 @@ int main(void) {
     return 0;
 }
 
+/**
+ * @brief Prints formatted output to the standard output stream.
+ * @param[in] fmt A format string containing format specifiers.
+ * @param[in] ... Variable number of arguments.
+ */
 void minprintf(char *fmt, ...) {
     va_list ap; /* points to each unnamed arg in turn */
     char *p, *sval;
