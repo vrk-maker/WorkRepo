@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define BUFSIZE 100
-#define SIZE 5
+#define BUFSIZE 100 /**< The size of the input buffer. */
+#define SIZE 5      /**< The size of the array to store integers. */
 
-int bufp = 0;
+int bufp = 0; 
 
 char buf[BUFSIZE];
 
@@ -30,8 +30,12 @@ int main()
 
 
 
-/* getint: get next integer from input into *pn */
 
+/**
+ * @brief Reads an integer from input.
+ * @param[in] pn Pointer to the integer read.
+ * @return The integer read, or 0 if it fails to read.
+ */
 int getint(int *pn)
 {
   int c, sign;
@@ -65,6 +69,10 @@ int getint(int *pn)
   return *pn;
 }
 
+/**
+ * @brief Pushes a character back into the buffer.
+ * @param[in] c is the character to be pushed back.
+ */
 void ungetch(int c)
 {
 	if (bufp >= BUFSIZE)
@@ -73,5 +81,10 @@ void ungetch(int c)
     	buf[bufp++] = c;
 }
 
+
+/**
+ * @brief Retrieves a character from input or the buffer.
+ * @return The character retrieved.
+ */
 int getch(void) { return (bufp > 0) ? buf[--bufp] : getchar(); }
 

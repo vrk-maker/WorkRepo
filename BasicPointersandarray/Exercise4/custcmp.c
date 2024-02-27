@@ -24,6 +24,16 @@ int main() {
 }
 
 // Function definition
+
+/**
+ * @brief Compares the first n characters of two strings.
+ * @param[in] s Pointer to the first string to be compared.
+ * @param[in] t Pointer to the second string to be compared.
+ * @param[in] n Number of characters to compare.
+ * @return 0 if the first n characters of both strings are equal and both strings
+ *         have been exhausted to a length of n. A non-zero value indicating
+ *         inequality otherwise.
+ */
 int mystrncmp(char *s, char *t, int n) 
 {
     while( (*s == *t) && (n>0) )

@@ -31,6 +31,12 @@ int main() {
     return 0;
 }
 
+/**
+ * @brief Finds the index of the first occurrence of a substring within a string.
+ * @param[in] s Pointer to the string in which to search for the substring.
+ * @param[in] t Pointer to the substring to search for within `s`.
+ * @return The index of the starting position of the first occurrence of `t` within `s`.
+ */
 int mstrindex(char *s, char *t) {
     char *b = s;
     char *p, *r;

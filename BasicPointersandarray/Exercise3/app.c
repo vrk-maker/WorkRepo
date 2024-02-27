@@ -15,6 +15,11 @@ int main()
 }
 
 // Function definition
+/**
+ * @brief Concatenates two strings.
+ * @param[in] s Pointer to the destination string.
+ * @param[in] t Pointer to the source string to be appended to `s`.
+*/
 void strncat_custom(char *s, char *t)
 {
     while (*s !='\0')

@@ -3,12 +3,19 @@
 #include"head.h"
 void reverse(char *s);
 
+/**
+ * @brief Main function.
+ */
 void fun3() {
     char s[] = "hello world";
     reverse(s);
     printf("%s", s);
 }
 
+/**
+ * @brief Reverses the characters in a string.
+ * @param[in] str Pointer to the null-terminated string to be reversed.
+ */
 void reverse(char *str) 
 {
     int len = strlen(str); 

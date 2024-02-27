@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define BUFSIZE 100
-#define SIZE 1
+#define BUFSIZE 100 /**< The size of the input buffer. */
+#define SIZE 1 /**< The size of the array to store integers. */
 
 int bufp = 0;
 
@@ -28,6 +28,13 @@ int main()
 	return 0;
 }
 
+/**
+ * @brief parses a floating-point number from the input stream, handles integers and fractions, and stores the result in the provided memory location, while also returning the next character from the input stream.
+ 
+ * @param[in] pf Pointer to a float variable where the read value will be stored.
+ * @return The next character from input after reading the floating point number.
+ *         Returns EOF if the end of input is encountered.
+ */
 float getfloat(float *pf)
 {
     int c, sign;
@@ -69,6 +76,10 @@ float getfloat(float *pf)
     return c;
 }
 
+/**
+ * @brief Pushes a character back into the buffer.
+ * @param[in] c is the character to be pushed back.
+ */
 void ungetch(int c)
 {
 	if (bufp >= BUFSIZE)
@@ -77,5 +88,9 @@ void ungetch(int c)
     	buf[bufp++] = c;
 }
 
+/**
+ * @brief Retrieves a character from input or the buffer.
+ * @return The character retrieved.
+ */
 int getch(void) { return (bufp > 0) ? buf[--bufp] : getchar(); }
 
