@@ -5,27 +5,45 @@
 #include <stdbool.h>
 
 enum {
-    MAX_NAME = 256,
-    TABLE_SIZE = 10
+    MAX_NAME = 256, /**< Maximum length of a person's name */
+    TABLE_SIZE = 10 /**< Size of the hash table */
 };
 
+/**
+ * @struct person
+ * @brief Structure representing a person with a name and an age.
+ */
 typedef struct {
     char name[MAX_NAME];
     int age;
 } person;
 
-person *hash_table[TABLE_SIZE];
+person *hash_table[TABLE_SIZE];/**< Hash table to store persons */
 
-unsigned int hash(int age) {
+
+/**
+ * @brief Hashes the age to an index in the hash table.
+ * @param[in] age The age to hash.
+ * @return The index in the hash table.
+ */
+int hash(int age) {
     return age % TABLE_SIZE;
 }
 
+/**
+ * @brief Initializes the hash table.
+ */
 void init_hash_table() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         hash_table[i] = NULL;
     }
 }
 
+/**
+ * @brief Inserts a person into the hash table.
+ * @param[in] p Pointer to the person to insert.
+ * @return true if insertion is successful, false otherwise.
+ */
 bool hash_install(person *p) {
     if (p == NULL) {
         return false;
@@ -38,6 +56,11 @@ bool hash_install(person *p) {
     return true;
 }
 
+/**
+ * @brief Looks up a person in the hash table based on age.
+ * @param[in] age The age of the person to look up.
+ * @return Pointer to the person if found, NULL otherwise.
+ */
 person *hash_lookup(int age) {
     int index = hash(age);
     if (hash_table[index] != NULL && hash_table[index]->age == age) {
@@ -47,6 +70,11 @@ person *hash_lookup(int age) {
     }
 }
 
+/**
+ * @brief Deletes a person from the hash table based on age.
+ * @param[in] age The age of the person to delete.
+ * @return Pointer to the deleted person if found, NULL otherwise.
+ */
 person *hash_delete(int age) {
     int index = hash(age);
     if (hash_table[index] != NULL && hash_table[index]->age == age) {
@@ -59,6 +87,9 @@ person *hash_delete(int age) {
     }
 }
 
+/**
+ * @brief Prints the contents of the hash table.
+ */
 void print_table() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (hash_table[i] == NULL) {

@@ -5,22 +5,34 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAX_NAME 256
-#define TABLE_SIZE 10
+#define MAX_NAME 256 /**< Maximum length of a person's name */
+#define TABLE_SIZE 10 /**< Size of the hash table */
 
+/**
+ * @struct person
+ * @brief Structure representing a person with a name and an age.
+ */
 typedef struct
 {
 	char name[MAX_NAME];
 	int age;
 } person;
 
-person *hash_table[TABLE_SIZE];
+person *hash_table[TABLE_SIZE];/**< Hash table to store persons */
 
-unsigned int hash(int age)
+/**
+ * @brief Hashes the age to an index in the hash table.
+ * @param[in] age The age to hash.
+ * @return The index in the hash table.
+ */
+int hash(int age)
 {
 	return age % TABLE_SIZE;
 }
 
+/**
+ * @brief Initializes the hash table.
+ */
 void init_hash_table()
 {
 	for(int i = 0; i < TABLE_SIZE; i++)
@@ -29,6 +41,11 @@ void init_hash_table()
 	}
 }
 
+/**
+ * @brief Inserts a person into the hash table.
+ * @param p Pointer to the person to insert.
+ * @return true if insertion is successful, false otherwise.
+ */
 bool hash_insert(person *p)
 {
 	if(p == NULL)
@@ -44,6 +61,11 @@ bool hash_insert(person *p)
 	return true;
 }
 
+/**
+ * @brief Looks up a person in the hash table based on age.
+ * @param[in] age The age of the person to look up.
+ * @return Pointer to the person if found, NULL otherwise.
+ */
 person *hash_lookup(int age)
 {
 	int index = hash(age);
@@ -57,6 +79,11 @@ person *hash_lookup(int age)
 	}
 }
 
+/**
+ * @brief Deletes a person from the hash table based on age.
+ * @param[in] age The age of the person to delete.
+ * @return Pointer to the deleted person if found, NULL otherwise.
+ */
 person *hash_delete(int age)
 {
 	int index = hash(age);
@@ -73,6 +100,9 @@ person *hash_delete(int age)
 	}
 }
 
+/**
+ * @brief Prints the contents of the hash table.
+ */
 void print_table()
 {
 	for(int i = 0; i < TABLE_SIZE; i++)

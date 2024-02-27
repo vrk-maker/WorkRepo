@@ -2,11 +2,20 @@
 #include <string.h>
 
 // Structure to store word and its count
+/**
+ * @struct WordCount
+ * @brief Structure to store a word and its count.
+ */
 struct WordCount {
     char word[50];
     int count;
 };
 
+/**
+ * @brief prints the distinct words in its input sorted into decreasing order of frequency of occurrence.
+ * @param[in] str The input string to analyze.
+ * @param[in] word The words to count occurrences of.
+ */
 void countOccurrences(char *str, char *word) {
     char *p, *q;
     int v = -1;

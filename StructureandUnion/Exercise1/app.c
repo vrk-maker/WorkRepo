@@ -1,15 +1,23 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define BUFSIZE 100
+#define BUFSIZE 100 /**< The size of the input buffer */
 
 char buf[BUFSIZE];  // Buffer for ungetch
 int bufp = 0;       // Next free position in buf
 
+/**
+ * @brief Retrieves a character from input or the buffer.
+ * @return The character retrieved.
+ */
 int getch(void) {   // Get a (possibly pushed back) character
     return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
+/**
+ * @brief Pushes a character back into the buffer.
+ * @param[in] c is the character to be pushed back.
+ */
 void ungetch(int c) {  // Push character back on input
     if (bufp >= BUFSIZE)
         printf("ungetch: too many characters\n");
@@ -29,6 +37,12 @@ int main() {
     return 0;
 }
 
+/**
+ * @brief Parses a word from input, handling preprocessor control lines, comments, and string constants.
+ * @param[out] word Pointer to the buffer where the word will be stored.
+ * @param[in] lim Maximum length of the word buffer.
+ * @return The first character of the parsed word, or EOF if end of file is encountered.
+ */
 int getword(char *word, int lim) {
     int c;
     char *w = word;
