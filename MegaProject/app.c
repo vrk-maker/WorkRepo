@@ -2,6 +2,15 @@
 #include "header.h"
 #include <stdlib.h>
 #include <ctype.h>
+
+/**
+ * @brief Main function of the program.
+ * 
+ * This function displays a menu for the user to choose between the admin panel, voter panel, or exiting the application.
+ * It continuously prompts the user until they choose to exit.
+ * 
+ * @return 0 on successful execution.
+ */
 int main()
 {
 	int choice;

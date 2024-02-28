@@ -5,12 +5,23 @@
 #include <stdbool.h>
 #include <ctype.h>
 
+/**
+ * @struct student
+ * @brief Structure to represent candidate information.
+ */
 struct student
 {
     int srno, num, vote;
     char name[100];
 };
 
+/**
+ * @brief Updates the details of a candidate in the candidate.csv file.
+ * 
+ * This function prompts the user to enter a serial number to be matched, and then 
+ * it searches for the matching serial number in the candidate.csv file. If a match 
+ * is found, it allows the user to update the name, number, or vote count of the candidate.
+ */
 void update()
 {
     FILE *fp, *temp;
@@ -178,6 +189,12 @@ void update()
     rename("temp.csv", "candidate.csv");
 }
 
+/**
+ * @brief function to check for the existence of the candidate.csv file before calling the update function.
+ * 
+ * This function first checks if the candidate.csv file exists. If it does, it calls the update function 
+ * to update the candidate details. If the file does not exist, it prints an error message.
+ */
 void newupdate()
 {
     FILE *fp;

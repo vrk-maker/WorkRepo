@@ -2,6 +2,12 @@
 #include "header.h"
 #include <stdlib.h>
 
+/**
+ * @brief Prompts the user to enter a Voter ID and validates it.
+ * 
+ * This function prompts the user to enter a Voter ID and then calls the 
+ * validateVoterID function to validate the entered ID.
+ */
 void entervoterid()
 {
 	char str1[20];
@@ -9,6 +15,9 @@ void entervoterid()
 	scanf("%s", str1);
 	validateVoterID(str1);
 }
+/**
+ * @brief Displays the voting panel.
+ */
 void voting_pannel()
 {
 	int choice;

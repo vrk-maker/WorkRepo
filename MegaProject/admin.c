@@ -8,6 +8,11 @@
 #include <stdbool.h>
 // #define BUFFER_SIZE 100
 // #define MAX_LINE_LENGTH 100
+
+/**
+ * @struct cname
+ * @brief Structure to represent candidate information.
+ */
 struct cname
 {
     char name[20];
@@ -15,7 +20,7 @@ struct cname
     int serial;
     int votes;
 };
-struct cname *arr;
+struct cname *arr; /**< Pointer to an array of candidate structures */
 // arr=(struct cname*) malloc(sizeof(struct cname)*4);
 
 int checkcand = 0;
@@ -23,12 +28,18 @@ int alreadyentered = 0;
 int candlist;
 int i = 0;
 // user authentication
+/**
+ * @brief Dynamically allocates memory for the array of candidate structures.
+ */
 void getarr()
 {
     arr = (struct cname *)malloc(sizeof(struct cname) * candlist);
     // return arr;
 }
 
+/**
+ * @brief for user authentication.
+ */
 void user_auth()
 {
     char username[20];
@@ -63,6 +74,10 @@ void user_auth()
 
 // election details
 int x;
+
+/**
+ * @brief Function to input and store election details in a file.
+ */
 void election_details()
 {
     FILE *fp;
@@ -113,7 +128,10 @@ void election_details()
 }
 
 // voter id verification
-
+/**
+ * @brief Validates the given voter ID and manages the voting process.
+ * @param[in] voterID The voter ID to be validated.
+ */
 int numVoters = 0;
 char voter[10][11];
 void validateVoterID(char *voterID)
@@ -196,7 +214,12 @@ void validateVoterID(char *voterID)
 }
 
 // add candidate
-
+/**
+ * @brief Adds a new candidate to the list of candidates.
+ * 
+ * This function prompts the user to input details of a new candidate such as name and number.
+ * It validates the input and adds the candidate to the list if it meets the criteria.
+ */
 void add_cand()
 {
     // struct cname *arr=getarr();
@@ -255,6 +278,9 @@ void add_cand()
 }
 
 // delete candidate
+/**
+ * @brief Delete a candidate on the basis of candidate number inputted by user.
+ */
 void delete_cand()
 {
     // struct cname *arr=getarr();
@@ -302,6 +328,12 @@ void delete_cand()
 }
 
 // edit details
+/**
+ * @brief Allows the user to edit candidate details.
+ * 
+ * This function prompts the user to enter the candidate number whose details need to be updated.
+ * It then provides options to update the candidate's name and number.
+ */
 void edit_cand()
 {
     // struct cname *arr=getarr();
@@ -459,6 +491,12 @@ void vote_cand()
 }
 
 // Voting results
+/**
+ * @brief Allows a voter to cast a vote for a candidate.
+ * 
+ * This function prompts the user to enter the candidate number they want to vote for.
+ * It validates the input and updates the vote count for the selected candidate.
+ */
 void result_cand()
 {
     // struct cname *arr=getarr();
@@ -509,6 +547,11 @@ void result_cand()
 }
 
 // show cand
+/**
+ * @brief Displays the list of candidates with their names and numbers.
+ * This function prints the list of candidates along with their serial numbers,
+ * names, and candidate numbers.
+ */
 void show_cand()
 {
 
@@ -523,6 +566,12 @@ void show_cand()
 }
 
 // Display candidate
+/**
+ * @brief Displays the list of candidates with their names, numbers, and vote counts.
+ * 
+ * This function prints the list of candidates along with their serial numbers,
+ * names, candidate numbers, and vote counts.
+ */
 void display_cand()
 {
     // struct cname *arr=getarr();
@@ -539,6 +588,13 @@ void display_cand()
         ++sno;
     }
 }
+
+/**
+ * @brief Stores candidate data in a CSV file.
+ * 
+ * This function stores the candidate data, including serial numbers, names,
+ * candidate numbers, and vote counts, in a CSV file named "candidate.csv".
+ */
 void store_file()
 {
     // struct cname *arr=getarr();
@@ -569,6 +625,13 @@ void store_file()
 
 // UPDATE OLD ELECTION----------------------------------------------------------------
 
+/**
+ * @brief Checks if the candidate data file exists.
+ * 
+ * This function checks if the file "candidate.csv" exists in the current directory.
+ * 
+ * @return true if the file exists, false otherwise.
+ */
 bool checkforold()
 {
     FILE *fp;
@@ -583,23 +646,11 @@ bool checkforold()
     return exist;
 }
 
-// bool checkelection()
-// {
-//     int sum = 0;
-//     for (int y = 0; y < candlist; y++)
-//     {
-//         sum = sum + (arr + y)->votes;
-//     }
-//     if (sum == x)
-//     {
-//         return true;
-//     }
-//     else
-//     {
-//         return false;
-//     }
-// }
-
+/**
+ * @brief Displays the contents of the candidate data file.
+ * 
+ * This function opens the file "candidate.csv" and prints its contents line by line.
+ */
 void display_file()
 {
     FILE *fp;
@@ -623,6 +674,14 @@ void display_file()
     // system("clear");
 }
 
+
+/**
+ * @brief Displays the contents of the candidate data file if it exists.
+ * 
+ * This function first checks if the file "candidate.csv" exists.
+ * If the file exists, it calls display_file() to display its contents.
+ * If the file does not exist, it prints a message indicating the absence of the file.
+ */
 void newdisplay_file()
 {
     FILE *fp;
@@ -641,6 +700,12 @@ void newdisplay_file()
     }
 }
 
+/**
+ * @brief Deletes candidate data with a specific serial number from the file.
+ * 
+ * This function prompts the user to enter a serial number and deletes the candidate data
+ * with that serial number from the file "candidate.csv".
+ */
 void deleteserial()
 {
     FILE *fp, *tmp;
@@ -703,6 +768,13 @@ void deleteserial()
     // system("clear");
 }
 
+/**
+ * @brief Checks if the candidate data file exists, and if so, invokes deleteserial().
+ * 
+ * This function first checks if the file "candidate.csv" exists.
+ * If the file exists, it calls deleteserial() to delete candidate data.
+ * If the file does not exist, it prints a message indicating the absence of the file.
+ */
 void newdeleteserial()
 {
     FILE *fp;
@@ -722,6 +794,9 @@ void newdeleteserial()
 }
 
 // int checkoldelection = 0;
+/**
+ * @brief Displays the admin panel.
+ */
 void admin_pannel()
 {
     user_auth();
