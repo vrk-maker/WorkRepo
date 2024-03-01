@@ -6,8 +6,14 @@
 int mstrindex(char s[], char t[]);
 
 int main() {
-    char line[] = "abcdefabc";
-    char pattern[] = "abc";
+    char line[30];
+    printf("enter string:");
+    scanf("%s", line);
+    printf("\n");
+    char pattern[30];
+    printf("enter pattern to be searched in the string:");
+    scanf("%s", pattern);
+    printf("\n");
 
     int found;
 

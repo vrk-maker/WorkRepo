@@ -62,14 +62,12 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">mgetline.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="head_8h_source.html">head.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mgetline.c:</div>
@@ -77,35 +75,15 @@ Include dependency graph for mgetline.c:</div>
 <div class="center"><img src="mgetline_8c__incl.png" border="0" usemap="#mgetline_8c" alt=""/></div>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ae6648cd71a8bd49d58ae8ed33ba910d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mgetline_8c.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>&#160;&#160;&#160;100</td></tr>
-<tr class="separator:ae6648cd71a8bd49d58ae8ed33ba910d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a61fbd11af22adb207034ccf94a93e40d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mgetline_8c.html#a61fbd11af22adb207034ccf94a93e40d">mgetline</a> (char *s, int lim)</td></tr>
-<tr class="memdesc:a61fbd11af22adb207034ccf94a93e40d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to calculate the length of the string.  <a href="mgetline_8c.html#a61fbd11af22adb207034ccf94a93e40d">More...</a><br /></td></tr>
-<tr class="separator:a61fbd11af22adb207034ccf94a93e40d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6007dd0e2be36bbf3e688554eb17fa8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mgetline_8c.html#ac6007dd0e2be36bbf3e688554eb17fa8">mgetline</a> (char *t)</td></tr>
+<tr class="memdesc:ac6007dd0e2be36bbf3e688554eb17fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the length of a string.  <a href="mgetline_8c.html#ac6007dd0e2be36bbf3e688554eb17fa8">More...</a><br /></td></tr>
+<tr class="separator:ac6007dd0e2be36bbf3e688554eb17fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad117480429a2cf8d6263379b575378e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mgetline_8c.html#ad117480429a2cf8d6263379b575378e5">fun1</a> ()</td></tr>
 <tr class="memdesc:ad117480429a2cf8d6263379b575378e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="mgetline_8c.html#ad117480429a2cf8d6263379b575378e5">More...</a><br /></td></tr>
 <tr class="separator:ad117480429a2cf8d6263379b575378e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ae6648cd71a8bd49d58ae8ed33ba910d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6648cd71a8bd49d58ae8ed33ba910d1">&#9670;&nbsp;</a></span>MAXLEN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAXLEN&#160;&#160;&#160;100</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ad117480429a2cf8d6263379b575378e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad117480429a2cf8d6263379b575378e5">&#9670;&nbsp;</a></span>fun1()</h2>
@@ -126,8 +104,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a61fbd11af22adb207034ccf94a93e40d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61fbd11af22adb207034ccf94a93e40d">&#9670;&nbsp;</a></span>mgetline()</h2>
+<a id="ac6007dd0e2be36bbf3e688554eb17fa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6007dd0e2be36bbf3e688554eb17fa8">&#9670;&nbsp;</a></span>mgetline()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,31 +114,21 @@ Functions</h2></td></tr>
           <td class="memname">int mgetline </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>lim</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>A function to calculate the length of the string. </p>
+<p>Calculates the length of a string. </p>
+<p>This function calculates the length of a null-terminated string.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">s</td><td>Pointer to the string whose length is to be calculated. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lim</td><td>which defines the maximum length of the string. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The string whose length is to be calculated. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the length of the string </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The length of the string. </dd></dl>
 
 </div>
 </div>

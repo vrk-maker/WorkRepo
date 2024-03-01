@@ -4,24 +4,35 @@
 void minprintf(char *fmt, ...);
 
 int main(void) {
-    char *a = "Hello,World";
+    char a[100];
+    printf("Enter a string: ");
+    scanf("%s", a);
     minprintf("%s", a);
     printf("\n");
     
-    int i = 10;
+    int i;
+    printf("Enter an integer: ");
+    scanf("%d", &i);
     minprintf("%d", i);
     printf("\n");
     
-    int b = 11;
-    minprintf("%o",b);
+    int b;
+    printf("Enter an integer to convert to octal: ");
+    scanf("%d", &b);
+    minprintf("%o", b);
     printf("\n");
     
-    char *c="hello";
-    minprintf(c);
+    char c[100];
+    printf("Enter a string: ");
+    scanf("%s", c);
+    minprintf("%s", c);
     printf("\n");
     
-    float z=11.0;
+    float z;
+    printf("Enter a floating-point number: ");
+    scanf("%f", &z);
     minprintf("%f", z);
+    printf("\n");
     
     return 0;
 }

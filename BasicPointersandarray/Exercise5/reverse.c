@@ -7,7 +7,10 @@ void reverse(char *s);
  * @brief Main function.
  */
 void fun3() {
-    char s[] = "hello world";
+    char s[10];
+    printf("enter string to reverse:");
+    scanf("%s", s);
+    printf("\n");
     reverse(s);
     printf("%s", s);
 }

@@ -6,7 +6,7 @@
 int mystrncmp(char *s, char *t, int n);
 
 int main() {
-    char s[] = "hello";
+    char s[] = "he";
     char t[] = "hello";
     int n = 3;
     int result = mystrncmp(s, t, n);
@@ -42,7 +42,7 @@ int mystrncmp(char *s, char *t, int n)
         t++;
         n--;
     }
-    if( (*s)=='\0' && n==0 )
+    if( (*s)=='\0' && (*t)=='\0' && n==0 )
     {
         return 0;
     }

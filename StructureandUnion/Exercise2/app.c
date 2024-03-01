@@ -41,15 +41,15 @@ void countOccurrences(char *str, char *word) {
     int numWords = 0;
 
     // Create an array to mark the status of each word
-    int marked[300] = {0}; // Initialized to 0
+    //int marked[300] = {0}; // Initialized to 0
 
     // Count occurrences and store in the WordCount array
     for (int l = 0; l < k; l++) {
         int c = 0;
         for (int j = 0; j < index; j++) {
-            if (strcmp(b[l], a[j]) == 0 && marked[j] != 1) {
+            if (strcmp(b[l], a[j]) == 0 ) {
                 c++;
-                marked[j] = 1; // Mark the word as counted
+                //marked[j] = 1; // Mark the word as counted
             }
         }
 

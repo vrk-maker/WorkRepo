@@ -10,7 +10,9 @@ void itoa(int n, char s[]);
  * @brief Main function.
  */
 void fun2() {
-    int n = 123;
+    int n;
+    printf("enter number you want to convert to string:");
+    scanf("%d", &n);
     char s[MAXLEN];
 
     itoa(n, s);

@@ -1,37 +1,29 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include"head.h"
-
-#define MAXLEN 100
-
-int mgetline(char *s, int lim);
+#include "head.h"
+/**
+ * @brief Calculates the length of a string.
+ *
+ * This function calculates the length of a null-terminated string.
+ *
+ * @param[in] t The string whose length is to be calculated.
+ * @return The length of the string.
+ */
+int mgetline(char *t) {
+    int count = 0;
+    while (*t != '\0') {
+        count++;
+        t++;
+    }
+    return count;
+}
 
 /**
  * @brief Main function.
  */
 void fun1() {
-    char s[MAXLEN];
-    
-    int length = mgetline(s, MAXLEN);
-
-    printf("Length of the string: %d\n", length);
-
+    char s[20];
+    printf("Enter a string whose length is to be calculated: ");
+    scanf("%19s", s); // Limit input length to avoid buffer overflow
+    int len = mgetline(s);
+    printf("\nThe length of the string is: %d\n", len);
 }
-
-/**
- * @brief A function to calculate the length of the string
- * @param[in] s Pointer to the string whose length is to be calculated.
- * @param[in] lim which defines the maximum length of the string.
- * @return the length of the string
- */
-int mgetline(char *s, int lim)
-{
-    int c, i;
-    char *b=s;
-    i = 0;
-    while (--lim > 0 && (c=getchar()) != EOF && c != '\n')
-        *(s++) = c;
-    *s = '\0';
-    return s-b;
-}
-
