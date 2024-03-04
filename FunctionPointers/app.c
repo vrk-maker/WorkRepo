@@ -1,15 +1,14 @@
 #include <stdio.h>
 
-
 /**
  * @brief Adds two integers.
- * @param[in] x An integer.
- * @param[in] y An integer.
- * @return The sum of x and y.
+ * @param[in] fvalue An integer.
+ * @param[in] svalue An integer.
+ * @return The sum of fvalue and svalue.
  */
-int func(int x,int y)
+int func(int fvalue,int svalue)
 {
-    return x+y;
+    return fvalue + svalue;
 }
 int main()
 {
@@ -21,7 +20,7 @@ int main()
     printf("enter second number:");
     scanf("%d",&num2);
     printf("\n");
-    int res=ptr(num1,num2);
+    int res=(*ptr)(num1,num2);
     printf("sum=%d\n",res);
     return 0;
 }

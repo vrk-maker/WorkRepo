@@ -19,7 +19,12 @@ int sum(int a,int b)
  */
 void getsum(int (*ptr)(int,int))
 {
-    printf("sum of two values=%d\n",ptr(5,7));
+    int x,y;
+    printf("x=");
+    scanf("%d",&x);
+    printf("y=");
+    scanf("%d",&y);
+    printf("sum of two values=%d\n",ptr(x,y));
 }
 
 
