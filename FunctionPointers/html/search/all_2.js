@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_2',['main',['../app_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'app.c']]]
+  ['func_2',['func',['../app_8c.html#abc6beda4fe97babbe39afa378be7c779',1,'app.c']]]
 ];
