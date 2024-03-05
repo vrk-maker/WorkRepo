@@ -48,7 +48,7 @@ int main(void)
             break;
         case '-':
             op2 = pop();
-            push(pop() - op2);
+            push((op2)-pop());
             break;
         case '/':
             op2 = pop();
