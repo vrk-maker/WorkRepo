@@ -4,19 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXLINE 100   /**< Maximum length of input line */
+#define MAXLINE 2   /**< Maximum length of input line */
 #define NUMBER '0'    /**< Code indicating a number */
 #define MAXVAL 100    /**< Maximum stack depth */
 
 int sp = 0;
-//int bufp = 0;
 
 double val[MAXVAL];
-//char buf[BUFSIZE];
-
-char variables[26]; // Array to store variables ('a' to 'z')
-
-//int mgetLine(char[], int);
 
 void push(double);
 double pop(void);
@@ -43,9 +37,6 @@ int main(void)
             }
             break;
         }
-        // case VARIABLE: // Handle variables
-        //     push(variables[s[0]]);
-        //     break;
         case '+':
             push(pop() + pop());
             break;
